@@ -1,9 +1,10 @@
 <template>
+  
+<ScoreBoard :winCount="this.winCount" :loseCount="this.loseCount"/>
 
-  <ScoreBoard :winCount="this.winCount" :loseCount="this.loseCount"/>
-    <h2 v-html="this.question"></h2>
-    
+<h2 v-html="this.question"></h2>
     <template v-if="this.question">
+
       <template v-for="answer in this.answers" :key="answer">
         <input 
           :disabled="this.answerSubmited"
@@ -21,10 +22,13 @@
       v-html="'&#9989; Congratulations, the answer ' +  this.correctAnswer + ' is correct.'"> 
       </h4>
       <h4 v-else
-      v-html="'I\'m sorry, you picked the wrong answer. The correct is ' + this.correctAnswer + '.'" > 
+      v-html="'&#10060; I\'m sorry, you picked the wrong answer. The correct is ' + this.correctAnswer + '.'" > 
       </h4>
       <button class="btn next" type="button" @click="this.getNewQuestion()">Next question</button>
     </div>
+    <template v-if="(this.winCount  && this.loseCount) === 2">
+      <h2>Fin de partie</h2>
+    </template>
 </template>
 
 <script>
@@ -77,7 +81,7 @@ export default {
       this.chosenAnswer = undefined;
       this.question = undefined;
       this.axios
-        .get('https://opentdb.com/api.php?amount=1&category=18')
+        .get('https://opentdb.com/api.php?amount=10&category=17')
         .then((response) => {
           this.question = response.data.results[0].question;
           this.incorrectAnswers = response.data.results[0].incorrect_answers;
@@ -112,6 +116,9 @@ input[type='radio'] {
   color: rgb(231, 225, 225);
   margin-top: 20px;
   border-radius: 3px;
+}
+.btn:hover {
+  opacity: 0.7;
 }
 .next {
   width: 120px;
