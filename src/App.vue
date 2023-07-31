@@ -18,9 +18,7 @@
       <button v-if="!this.answerSubmited" class="btn" @click="this.submitAnswer()" type="button">Send</button>
     </template>
     <div class="result" v-if="this.answerSubmited">
-      <h4 v-if="this.chosenAnswer == this.correctAnswer" 
-      v-html="'&#9989; Congratulations, the answer ' +  this.correctAnswer + ' is correct.'"> 
-      </h4>
+      <h4 v-if="this.chosenAnswer == this.correctAnswer" v-html="'&#9989; Congratulations, the answer ' +  this.correctAnswer + ' is correct.'"></h4>
       <h4 v-else
       v-html="'&#10060; I\'m sorry, you picked the wrong answer. The correct is ' + this.correctAnswer + '.'" > 
       </h4>
@@ -37,7 +35,7 @@ import ScoreBoard from '@/components/ScoreBoard.vue';
 export default {
   name: 'App',
   components: {
-    ScoreBoard
+    ScoreBoard,
   },
 
   data() {
@@ -123,4 +121,8 @@ input[type='radio'] {
 .next {
   width: 120px;
 }
+span {
+  color: red;
+}
 </style>
+      v-html="'&#9989; Congratulations, the answer ' +  this.correctAnswer + ' is correct.'"> 
